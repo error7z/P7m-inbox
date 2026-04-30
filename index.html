@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P7M ULTRA | Enterprise v5.5</title>
+    <title>P7M ULTRA | v6.0 Stable</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -34,21 +34,21 @@
 
             <div class="premium-border">
                 <div class="glass-card p-4 space-y-3">
-                    <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest">Intelligence Hub</p>
+                    <p class="text-[10px] font-black text-blue-400 uppercase tracking-widest text-center">Intelligence Hub</p>
                     <div class="flex items-center justify-between bg-black/40 p-3 rounded-lg border border-white/5">
-                        <span class="text-[10px] text-zinc-400 uppercase font-bold">Tunnel:</span>
-                        <div id="proxy-status-light" class="w-3 h-3 rounded-full bg-red-600 shadow-[0_0_5px_red]"></div>
+                        <span class="text-[10px] text-zinc-400 uppercase font-bold">ASN Tunnel:</span>
+                        <div id="proxy-status-light" class="w-3 h-3 rounded-full bg-red-600"></div>
                     </div>
-                    <button onclick="connectServerProxy()" class="w-full bg-blue-600 py-3 rounded text-[10px] font-black uppercase btn-action tracking-widest">Check Connection</button>
-                    <div id="ip-details" class="bg-black/50 p-3 rounded-lg text-[10px] font-mono space-y-1 min-h-[80px]">
-                        <p class="text-zinc-500 italic">Standby...</p>
+                    <button onclick="connectServerProxy()" class="w-full bg-blue-600 py-3 rounded text-[10px] font-black uppercase btn-action tracking-widest">Connect Proxy</button>
+                    <div id="ip-details" class="bg-black/50 p-3 rounded-lg text-[10px] font-mono space-y-1 min-h-[60px]">
+                        <p class="text-zinc-500 italic">No Connection...</p>
                     </div>
                 </div>
             </div>
 
             <div class="premium-border">
                 <div class="glass-card p-4 space-y-3">
-                    <p class="text-[10px] font-black text-orange-400 uppercase tracking-widest">Rotation Protocol</p>
+                    <p class="text-[10px] font-black text-orange-400 uppercase tracking-widest text-center">Rotation Logic</p>
                     <select id="rotation-mode" class="input-glow save-data" onchange="toggleBatchInput()">
                         <option value="1-by-1">1-BY-1 (Sequential)</option>
                         <option value="random">Random (Chaos)</option>
@@ -57,10 +57,6 @@
                     <div id="batch-container" class="hidden">
                         <input type="number" id="batch-count" value="10" placeholder="Batch Size" class="input-glow">
                     </div>
-                    <select id="send-mode" class="input-glow save-data">
-                        <option value="raw">Raw Send (Direct)</option>
-                        <option value="smart">Smart Engine (Clean)</option>
-                    </select>
                     <input type="number" id="send-delay" placeholder="Delay (MS)" value="5000" class="input-glow save-data">
                 </div>
             </div>
@@ -70,20 +66,20 @@
                     <div class="bg-zinc-900 p-3 rounded-xl text-center"><span class="text-[9px] text-zinc-500 uppercase font-bold">Inbox</span><p id="v-sent" class="text-3xl font-black text-green-500">0</p></div>
                     <div class="bg-zinc-900 p-3 rounded-xl text-center"><span class="text-[9px] text-zinc-500 uppercase font-bold">Block</span><p id="v-fail" class="text-3xl font-black text-red-500">0</p></div>
                 </div>
-                <button onclick="launch()" id="btn-start" class="w-full bg-blue-600 py-4 rounded-xl font-black text-xs uppercase btn-action">Initiate Blast</button>
-                <button onclick="forceStop()" id="btn-stop" class="w-full bg-red-900/20 text-red-500 border border-red-500/50 py-4 rounded-xl font-black text-xs hidden">Stop</button>
+                <button onclick="launch()" id="btn-start" class="w-full bg-blue-600 py-4 rounded-xl font-black text-xs uppercase btn-action tracking-widest">Initiate Blast</button>
+                <button onclick="forceStop()" id="btn-stop" class="w-full bg-red-900/20 text-red-500 border border-red-500/50 py-4 rounded-xl font-black text-xs hidden">Stop Engine</button>
             </div>
         </div>
 
         <div class="col-span-6 space-y-4">
             <div class="grid grid-cols-2 gap-4">
                 <div class="glass-card p-4 border border-white/5">
-                    <span class="text-[10px] font-bold text-zinc-400 uppercase">SMTPs: <b id="count-smtp" class="text-blue-500">0</b></span>
-                    <input type="file" id="f-smtp" accept=".csv" class="text-[10px] w-full mt-1">
+                    <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">SMTP Database: <b id="count-smtp" class="text-blue-500">0</b></span>
+                    <input type="file" id="f-smtp" accept=".csv" class="text-[10px] w-full mt-2 text-zinc-500">
                 </div>
                 <div class="glass-card p-4 border border-white/5">
-                    <span class="text-[10px] font-bold text-zinc-400 uppercase">Targets: <b id="count-target" class="text-green-500">0</b></span>
-                    <input type="file" id="f-target" accept=".csv" class="text-[10px] w-full mt-1">
+                    <span class="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Targets List: <b id="count-target" class="text-green-500">0</b></span>
+                    <input type="file" id="f-target" accept=".csv" class="text-[10px] w-full mt-2 text-zinc-500">
                 </div>
             </div>
 
@@ -96,7 +92,7 @@
                     
                     <div class="bg-blue-900/10 p-3 rounded-xl flex gap-3">
                         <input type="text" id="btn-url" placeholder="Redirect URL" class="input-glow flex-1">
-                        <input type="text" id="btn-text" placeholder="Button Text" class="input-glow w-1/3">
+                        <input type="text" id="btn-text" placeholder="Button Label" class="input-glow w-1/3">
                     </div>
 
                     <div class="bg-black/40 p-4 rounded-xl border border-white/10 flex items-center justify-between gap-4">
@@ -104,11 +100,18 @@
                             <p class="text-[9px] font-black text-blue-400 uppercase mb-1">Attachment Hub (Auto-Compress)</p>
                             <input type="file" id="f-attach" class="text-[10px] w-full text-zinc-400">
                         </div>
-                        <div id="file-info" class="text-[10px] font-mono text-zinc-500 bg-black p-2 rounded border border-white/5 min-w-[100px] text-center">Empty</div>
+                        <div class="w-1/3">
+                            <p class="text-[9px] font-black text-orange-400 uppercase mb-1">Engine Mode</p>
+                            <select id="send-mode" class="input-glow save-data h-[34px]">
+                                <option value="raw">Raw (Direct)</option>
+                                <option value="smart">Smart (Clean)</option>
+                            </select>
+                        </div>
+                        <div id="file-info" class="text-[10px] font-mono text-zinc-500 bg-black p-2 rounded border border-white/5 min-w-[80px] text-center mt-4">Empty</div>
                     </div>
 
                     <textarea id="s-body" oninput="updatePreview()" class="input-glow font-mono text-[10px] h-[250px] custom-scroll save-data" placeholder="HTML Payload Code..."></textarea>
-                    <div class="bg-white rounded-lg overflow-hidden h-[180px] border border-zinc-800"><iframe id="p-frame" class="w-full h-full"></iframe></div>
+                    <div class="bg-white rounded-lg overflow-hidden h-[180px] border border-zinc-800"><iframe id="p-frame" class="w-full h-full border-0"></iframe></div>
                 </div>
             </div>
         </div>
@@ -116,7 +119,7 @@
         <div class="col-span-3">
             <div class="glass-card h-full flex flex-col">
                 <div class="p-4 border-b border-white/5 flex justify-between items-center">
-                    <h3 class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Live Monitor</h3>
+                    <h3 class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Live Logs</h3>
                     <button onclick="document.getElementById('log').innerHTML=''" class="text-[9px] text-red-500 font-bold">WIPE</button>
                 </div>
                 <div id="log-container" class="p-4 custom-scroll"><div id="log" class="space-y-2 font-mono text-[9px]"></div></div>
@@ -128,40 +131,39 @@
 
     <script>
         let smtps = [], targets = [], sent = 0, fail = 0, isRunning = false;
-        let smtpPointer = 0, batchTracker = 0;
-        let attachmentBase64 = null, attachmentName = null;
+        let smtpPointer = 0, batchTracker = 0, attachmentBase64 = null, attachmentName = null;
 
         function toggleBatchInput() {
             document.getElementById('batch-container').classList.toggle('hidden', document.getElementById('rotation-mode').value !== 'continuous');
         }
 
+        // Fixed Proxy Connection logic
         async function connectServerProxy() {
             const light = document.getElementById('proxy-status-light');
             const display = document.getElementById('ip-details');
-            light.className = "w-3 h-3 rounded-full bg-yellow-500 animate-pulse";
-            display.innerHTML = '<span class="text-blue-400">CONNECTING...</span>';
+            light.className = "w-3 h-3 rounded-full bg-yellow-500 animate-pulse shadow-[0_0_10px_orange]";
+            display.innerHTML = '<span class="text-blue-400">HANDSHAKING...</span>';
             
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 8000);
-
             try {
+                // Shortened fetch with simple timeout
                 const res = await fetch('/api/check-proxy', { 
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    signal: controller.signal
+                    cache: 'no-store'
                 });
-                const data = await res.json();
-                clearTimeout(timeoutId);
-                if (data.success) {
-                    light.className = "w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_green]";
-                    display.innerHTML = `IP: ${data.ip}<br>ISP: ${data.isp}<br>LOC: ${data.city}, ${data.country}`;
-                } else throw new Error();
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    light.className = "w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]";
+                    display.innerHTML = `IP: ${data.ip}<br>ASN: ${data.isp || 'Authenticated'}<br>LOC: ${data.city || 'Success'}`;
+                } else { throw new Error(); }
             } catch (e) {
-                light.className = "w-3 h-3 rounded-full bg-red-600";
-                display.innerHTML = "Status: Connection Timeout";
+                light.className = "w-3 h-3 rounded-full bg-red-600 shadow-[0_0_10px_red]";
+                display.innerHTML = '<span class="text-red-500">Status: Connection Failed</span>';
             }
         }
 
+        // Auto-Compression for Inboxing
         document.getElementById('f-attach').onchange = async function(e) {
             const file = e.target.files[0];
             const info = document.getElementById('file-info');
@@ -180,6 +182,7 @@
                         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
                         attachmentBase64 = canvas.toDataURL('image/jpeg', 0.6).split(',')[1];
                         info.innerText = "IMG Ready";
+                        info.className = "text-[10px] font-mono text-green-500 bg-black p-2 rounded";
                     };
                     img.src = ev.target.result;
                 };
@@ -189,6 +192,7 @@
                 reader.onload = () => { attachmentBase64 = reader.result.split(',')[1]; };
                 reader.readAsDataURL(file);
                 info.innerText = "DOC Ready";
+                info.className = "text-[10px] font-mono text-blue-400 bg-black p-2 rounded";
             }
         };
 
@@ -196,21 +200,19 @@
             const html = document.getElementById('s-body').value;
             const btnUrl = document.getElementById('btn-url').value;
             const btnText = document.getElementById('btn-text').value;
-            
             let btnCode = "";
             if(btnUrl && btnText) {
-                btnCode = `<div style="margin:20px 0; text-align:center;"><a href="${btnUrl}" style="background:#3b82f6; color:#fff; padding:12px 25px; text-decoration:none; border-radius:5px; font-weight:bold;">${btnText}</a></div>`;
+                btnCode = `<div style="margin:20px 0; text-align:center;"><a href="${btnUrl}" style="background:#3b82f6; color:#fff; padding:12px 25px; text-decoration:none; border-radius:5px; font-weight:bold; display:inline-block;">${btnText}</a></div>`;
             }
-
             let finalHtml = html.includes('{{LINK_BUTTON}}') ? html.replace('{{LINK_BUTTON}}', btnCode) : (html + btnCode);
             if(mode === 'raw') return finalHtml;
-
-            const ghost = ['\u200B', '\u200C'][Math.floor(Math.random()*2)];
-            return `<div style="font-family:sans-serif;">${ghost}${finalHtml}</div>`;
+            // Smart Filter: Adds zero-width noise to break footprint detection
+            const noise = ['\u200B', '\u200C'][Math.floor(Math.random()*2)];
+            return `<div style="display:none">${noise}</div>` + finalHtml;
         }
 
         async function launch() {
-            if(!smtps.length || !targets.length) return alert("Load databases!");
+            if(!smtps.length || !targets.length) return alert("Upload CSVs first.");
             isRunning = true; toggleUI(true);
             smtpPointer = 0; batchTracker = 0;
 
@@ -242,8 +244,8 @@
                     const res = await fetch('/api/send', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
                     const r = await res.json();
                     if(r.success) { sent++; addLog(`SUCCESS: ${targets[i][0]}`, "text-green-400"); }
-                    else { fail++; addLog(`BLOCK: ${targets[i][0]}`, "text-red-500"); }
-                } catch (e) { fail++; }
+                    else { fail++; addLog(`FAIL: ${targets[i][0]}`, "text-red-500"); }
+                } catch (e) { fail++; addLog("SERVER ERROR", "text-red-600"); }
 
                 updateStats();
                 await new Promise(r => setTimeout(r, parseInt(document.getElementById('send-delay').value)));
@@ -251,6 +253,8 @@
             isRunning = false; toggleUI(false);
         }
 
+        document.getElementById('f-smtp').onchange = e => handleCSV(e, 'smtp');
+        document.getElementById('f-target').onchange = e => handleCSV(e, 'target');
         function handleCSV(e, type) {
             Papa.parse(e.target.files[0], { skipEmptyLines: true, complete: r => {
                 const data = r.data.filter(x => x.length > 0);
@@ -258,8 +262,7 @@
                 else { targets = data; document.getElementById('count-target').innerText = data.length; }
             }});
         }
-        document.getElementById('f-smtp').onchange = e => handleCSV(e, 'smtp');
-        document.getElementById('f-target').onchange = e => handleCSV(e, 'target');
+
         function updateStats() { document.getElementById('v-sent').innerText = sent; document.getElementById('v-fail').innerText = fail; }
         function addLog(m, c) { const d = document.createElement('div'); d.className = c; d.innerText = `[${new Date().toLocaleTimeString()}] ${m}`; document.getElementById('log').prepend(d); }
         function toggleUI(r) { document.getElementById('btn-start').classList.toggle('hidden', r); document.getElementById('btn-stop').classList.toggle('hidden', !r); }
